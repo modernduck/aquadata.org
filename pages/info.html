@@ -1,0 +1,59 @@
+<section class="info">
+	<section class="specie card">
+		<div class="photo">
+			<img ng-src="{{item.picture}}">
+			<div class="description">
+				<h4>{{item.nickname}}</h4>
+			</div>
+		</div>
+		<div class="content-wrapper">
+			<div class="content">
+				<h1>{{item.name}}</h1>
+				<table class="table">
+					<tr>
+						<td class="header">pH</td>
+						<td class="value">{{item.min_ph}} - {{item.max_ph}}</td>
+						<td class="header">dH</td>
+						<td class="value">{{item.min_dh}} - {{item.max_dh}} d</td>
+					</tr>
+					<tr>
+						<td class="header">Size</td>
+						<td class="value">{{item.size_min_cm}} - {{item.size_max_cm}} cm.</td>
+						<td class="header">Temp.</td>
+						<td class="value">{{item.temp_min_c}} - {{item.temp_max_c}} C</td>
+					</tr>
+					<tr>
+						<td class="header">Diet</td>
+						<td class="value">{{item.diet}}</td>
+						<td class="header">Habitat</td>
+						<td class="value">{{item.habitat}}</td>
+					</tr>
+
+				</table>
+				<span ng-show="item.can_bred">*Available captive bred</span>
+				<iucn iucn="iucn"></iucn>
+			</div>
+		</div>
+
+	</section>
+
+	<!--	<pre>{{item}}</pre>-->
+	<section class="seriousfish" style="background:#dee6ea;padding:10px;border-radius:10px;color:#333;margin-bottom:10px;">
+		<figure style="text-align:right;color:#073050;float:right">
+			Care guide from  
+			<a href="http://www.seriouslyfish.com/species/{{item | specie_name}}" target="_blank"><img src="refimg/sfish-logo.png" style="height:40px;"></a>
+		</figure>
+		<srscontent header="Distribution" content="srsInfo.distribution"></srscontent>
+		<srscontent header="Habitat" content="srsInfo.habitat"></srscontent>
+		<div>
+		<srscontent header="Diet" content="srsInfo.diet"></srscontent>
+		<srscontent header="Maintenance" content="srsInfo.maintenance"></srscontent>
+		<srscontent header="Behaviour" content="srsInfo.behaviour"></srscontent>
+		<srscontent header="Reproduction" content="srsInfo.reproduction"></srscontent>
+	</section>
+	<div>
+		<img ng-repeat="image in srsInfo.images" ng-src="{{image}}" class="img-thumbnail" style="margin-right:10px;margin-bottom:10px;">
+	</div>
+</section>
+
+ 

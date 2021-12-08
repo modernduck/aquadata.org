@@ -1,0 +1,20 @@
+<section class="slide">
+	<div class="item">
+		<img my-src="img/{{item.year}}/{{item.img}}.jpg">
+		<aside class="description">
+			<h4>{{item.name}}</h4>
+			<div class="content">
+				<p style="margin-bottom: 0px;">{{item.material}}</p>
+				<p style="margin-bottom: 0px;">{{item.dimension}}</p>
+			<!--	<p style="margin-bottom: 0px;">{{item.tag}}</p>-->
+			    <p style="margin-bottom: 0px;"><a class="year" href="#works/year/{{item.year}}">{{item.year}}</a></p>
+                <p></p>
+                <p></p>
+			</div>
+			<div class="nav">
+				<a href="" ng-click="goPrev()">< Prev </a>/<a href="" ng-click="goNext()"> Next ></a>
+			</div>
+		</aside>
+	</div>
+	
+</section>

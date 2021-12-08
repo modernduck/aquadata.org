@@ -1,0 +1,114 @@
+<section class="analize tank page" >
+	<div class="row" style="padding-bottom:5px;">
+		<div class="col-md-6 col-xs-8" style="position:relative;min-height:34px;">
+			<form ng-submit="updateName()">
+				<div class="form-group" style="position:absolute;width:95%;z-index:99999999;">
+					<input type="text" ng-model="tank.name"  class="form-control" style="font-size:1.5em;">
+				</div>
+				<input type="submit" ng-show="false">
+			</form>
+			&nbsp;
+		</div>
+		<div class="col-md-6 col-xs-4">
+			<a href="#/mytank" class="btn btn-lg btn-primary pull-left">Back</a>
+			<button class="btn btn-lg btn-danger pull-right" ng-click="deleteTank()">Delete</button>
+		</div>
+	</div>
+
+	
+	
+	<div class="row">
+		<div class="col-md-6">
+			<section class="area">
+				<div style="padding-bottom:75px;">
+					<tank-model tank="tank"></tank-model>
+				</div>
+				<div class="data">
+					<span class="header">Volume:</span> <span>{{tank.width * tank.depth * tank.height / 61.024 | number:2}} Liters</span> <span>{{tank.width * tank.depth * tank.height * 0.0043290 | number:2}} US Gallon</span>
+				</div>
+				<div class="data">
+					<span class="header">Weight:</span> <span>{{tank.width * tank.depth * tank.height / 61.024 | number:2}} Kg.</span> 
+				</div>
+				<div class="data">
+					<span class="header">pH:</span> <span>{{tank.min_ph}}</span> - <span>{{tank.max_ph}}</span>
+				</div>
+				<div class="data">
+					<span class="header">dH:</span> <span>{{tank.min_dh}}</span> - <span>{{tank.max_dh}}</span>
+				</div>
+				<div class="data">
+					<span class="header">Temparature:</span> <span>{{tank.temp_min_c}}</span> - <span>{{tank.temp_max_c}}</span> C
+				</div>
+
+			</section>
+		</div>
+		<div class="col-md-6">
+			<table class="table">
+				<tr ng-repeat="item in tank.fish" class="compat-{{item.isCompatible}}">
+						<td><a  href="#/index/fish{{item.path}}" target="_blank"><img style="max-width:100px;" ng-src="{{item.picture}}"></a></td>
+						<td>
+							<a  href="#/index/fish{{item.path}}" target="_blank">{{item.nickname}}</a>
+							<!-- ph min = 3 max = 9 -->
+							<!-- 100% = 9-3 = 6 -->
+							<gauge name="T" range="[10,32]" min="item.temp_min_c" max="item.temp_max_c" color="#face00"></gauge>
+							<gauge name="pH" range="[3,9]" min="item.min_ph" max="item.max_ph" color="#0face0"></gauge>
+							<gauge name="dh" range="[0,40]" min="item.min_dh" max="item.max_dh" color="#0Fface"></gauge>
+							<gauge name="Size" range="[0,tank.min*2.54]" min="0" max="item.size_max_cm" color="#fface0"></gauge>
+
+						</td>
+						
+							
+							
+						
+					</tr>
+				<tr ng-repeat="item in tank.invertebrates" class="compat-{{item.isCompatible}}">
+						<td><a  href="#/index/invertebrate{{item.path}}" target="_blank"><img style="max-width:100px;" ng-src="{{item.picture}}"></a></td>
+						<td>
+							<a  href="#/index/invertebrate{{item.path}}" target="_blank">{{item.nickname}}</a>
+							<!-- ph min = 3 max = 9 -->
+							<!-- 100% = 9-3 = 6 -->
+							<gauge name="T" range="[10,32]" min="item.temp_min_c" max="item.temp_max_c" color="#face00"></gauge>
+							<gauge name="pH" range="[3,9]" min="item.min_ph" max="item.max_ph" color="#0face0"></gauge>
+							<gauge name="dh" range="[0,40]" min="item.min_dh" max="item.max_dh" color="#0Fface"></gauge>
+							<gauge name="Size" range="[0,tank.min*2.54]" min="0" max="item.size_max_cm" color="#fface0"></gauge>
+
+						</td>
+						
+					</tr>
+				<tr ng-repeat="item in tank.plants" class="compat-{{item.isCompatible}}">
+						<td><a  href="#/index/plant{{item.path}}" target="_blank"><img style="max-width:100px;" ng-src="{{item.picture}}"></a></td>
+						<td>
+							<a  href="#/index/plant{{item.path}}" target="_blank">{{item.nickname}}</a>
+							<!-- ph min = 3 max = 9 -->
+							<!-- 100% = 9-3 = 6 -->
+							<gauge name="T" range="[10,32]" min="item.temp_min_c" max="item.temp_max_c" color="#face00"></gauge>
+							<gauge name="pH" range="[3,9]" min="item.min_ph" max="item.max_ph" color="#0face0"></gauge>
+							<gauge name="dh" range="[0,40]" min="item.min_dh" max="item.max_dh" color="#0Fface"></gauge>
+							Light : {{item.light_needs}}<br/>
+							Placement : {{item.tank_placement}}
+
+						</td>
+					</tr>
+			</table>
+		</div>
+
+	</div>
+	
+	
+	<section class="well" style="margin-top:20px;">
+		<h3>Capacity Calculator(beta)</h3>
+		<table class="table">
+			<tr>
+				<td colspan="{{tank.fish.length}}">
+					<gauge name="{{getMood().mood}}" range="[0.3,1.23]" min="((tank.width * tank.depth * tank.height * 0.0043290)/getSumInchFish(tank ).max)" max="((tank.width * tank.depth * tank.height * 0.0043290)/getSumInchFish(tank ).min |number:2)" color="{{getMood().color}}"></gauge>
+				</td>
+			</tr>
+			<tr>
+				<td ng-repeat="item in tank.fish">
+					<a  href="#/index/fish{{item.path}}" target="_blank"><img style="max-width:100px;" ng-src="{{item.picture}}"></a><br/>
+					<input type="number" ng-model="item.amount" min="1">
+				</td>
+			</tr>
+		</table>
+		1" per {{(tank.width * tank.depth * tank.height * 0.0043290)/getSumInchFish(tank ).max |number:2}} - {{(tank.width * tank.depth * tank.height * 0.0043290)/getSumInchFish(tank ).min |number:2}} gallon
+	</section>
+</section>

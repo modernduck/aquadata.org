@@ -1,0 +1,115 @@
+<section class="info">
+	<section class="specie card">
+		<div class="photo">
+			<img ng-src="{{item.picture}}">
+			<div class="description">
+				<h4>{{item.nickname}}</h4>
+			</div>
+		</div>
+		<div class="content-wrapper">
+			<div class="content">
+				<h1>{{item.name}}</h1>
+				<table class="table">
+					<tr>
+						<td class="header">pH</td>
+						<td class="value">{{item.min_ph}} - {{item.max_ph}}</td>
+						<td class="header">dH</td>
+						<td class="value">{{item.min_dh}} - {{item.max_dh}} d</td>
+					</tr>
+					<tr>
+						<td class="header">Tank Placement</td>
+						<td class="value">{{item.tank_placement}}</td>
+						<td class="header">Temp.</td>
+						<td class="value">{{item.temp_min_c}} - {{item.temp_max_c}} C</td>
+					</tr>
+					<tr>
+						<td class="header">Light</td>
+						<td class="value">{{item.light_needs}}</td>
+						<td class="header">Growth rate</td>
+						<td class="value">{{item.growth_rate}}</td>
+					</tr>
+
+				</table>
+				
+				<iucn iucn="iucn"></iucn>
+			</div>
+		</div>
+		
+	</section>
+
+	<!--	<pre>{{item}}</pre>-->
+	
+
+	
+	<!--<pre>{{info}}</pre>-->
+	<div class="information" style="padding:10px;border-radius:10px;background:#eee;color:#555;margin-top:10px;" >
+		<figure style="text-align:right;float:right;color:black">
+			Information from  
+			<a href="http://en.wikipedia.org/wiki{{item.path}}" target="_blank">Wikipedia</a> & Media from <a href="http://eol.org" target="_blank"><img src="http://eol.org/assets/v2/logo.png" style="height:40px;"></a>
+		</figure>
+		<h3>Overview</h3>
+		<div ng-repeat ="item in wiki_data.overview ">
+			<h4 ng-show="wiki_data.overview.length > 1 ">{{item.name}}</h4>
+			<p ng-repeat="p in item.data">{{p}}</p>
+		</div>
+		
+		<h3 ng-show="wiki_data.description.length > 0">Description</h3>
+		<div ng-repeat ="item in wiki_data.description" >
+			<h4 ng-show="wiki_data.description.length > 1">{{item.name}}</h4>
+			<p ng-repeat="p in item.data">{{p}}</p>
+		</div>
+		<hr/>
+		<h3>Distribution</h3>
+		<section >
+			<div style="float:left;max-width:500px;margin-right:10px;">
+				<eol-map maps="maps" ></eol-map>
+			</div>
+			<div >
+				<div ng-repeat ="item in wiki_data.distribution">
+					<h4 ng-show="wiki_data.distribution.length > 1">{{item.name}}</h4>
+					<p ng-repeat="p in item.data">{{p}}</p>
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+		</section>
+		
+		<hr/>
+		
+		<h3>Biology</h3>
+		<section >
+			<div style="float:left;max-width:606px;">
+				<div>
+					<img ng-repeat="image in info.images" ng-src="{{image}}" class="img-thumbnail" style="max-width:180px;margin-right:10px;margin-left:10px;">
+					<a ng-repeat="item in eol_images"  href="{{item.eolMediaURL}}" target="_blank">
+						<img class="img-thumbnail" ng-src="{{item.eolMediaURL}}" style="max-width:180px;margin-right:10px;margin-left:10px;">
+					</a>
+				</div>
+
+			</div>
+			<div >
+				<div ng-repeat ="item in wiki_data.aquarium">
+					<h4 ng-show="wiki_data.aquarium.length > 1">{{item.name}}</h4>
+					<p ng-repeat="p in item.data">{{p}}</p>
+				</div>
+			</div>
+			<div style="clear:both;"></div>
+		</section>
+		
+		<hr/>
+
+		
+	</div>
+	<p ng-show="info.wiki.length==0">
+			No info from wikipeia
+	</p>
+	
+<!--	<srscontent header="Habit" content="info.habit"></srscontent>
+	
+	<div>
+		<img ng-repeat="image in info.images" ng-src="{{image}}">
+	</div>-->
+</section>
+
+ 
+
+

@@ -1,0 +1,239 @@
+<section class="tank page" ng-hide="isAnalyzeMode">
+	<section id="tank-zone" class="setup area">
+		<div class="row">
+			<h1>Tank</h1>
+			<div class="col-sm-4" style="position:relative;height:100%;">
+				<tank-form tank="tank"></tank-form>
+				<div class="data">
+					<span class="header">Volume:</span> <span>{{tank.width * tank.depth * tank.height / 61.024 | number:2}} Liters</span> <span>{{tank.width * tank.depth * tank.height * 0.0043290 | number:2}} US Gallon</span>
+				</div>
+				<div class="data">
+					<span class="header">Weight:</span> <span>{{tank.width * tank.depth * tank.height / 61.024 | number:2}} Kg.</span> 
+				</div>
+				<button class="btn btn-primary btn-lg" style="position:absolute;width:100%;bottom:70px;" href="#fish-zone" scroll-on-click >Next</button>
+			</div>	
+			<div class="col-sm-8">
+				<tank-model tank="tank"></tank-model>
+				
+			</div>
+		</div>
+		
+		
+	</section>
+	
+	<hr/>
+	<section id="fish-zone" class="area">
+		<h1>Fish</h1>
+		
+		<!--<div class="form-inline" style="text-align:right">
+			Filter with
+			<div class="form-group">
+				<input type="checkbox" ng-model="fish_filter.isCheckVolume" > Volume
+			</div>
+			<div class="form-group">
+				<input type="checkbox"  ng-model="fish_filter.isCheckSurface" > Surface
+			</div>
+			<div class="form-group">
+				<input type="checkbox"  ng-model="fish_filter.isCheckPhTemp" ng-change="doSearch()"> pH and Temparature
+			</div>
+
+			
+		</div>-->
+		<search call-back="doSearch" query="fish_filter.query" hide-toggle="true" active="true"></search>
+		<div class="row">
+			<div class="col-sm-8">
+				<section class="items" >
+					<div  ng-repeat = "item in fish_result" class="item" ng-show="item.exist">
+						<show-image item="item" empty-images="emptyImages" on-load="onLoad" on-click="addFish" href="#/index/fish{{item.path}}"></show-image>
+					</div>
+				</section>	
+			</div>
+			<div class="col-sm-4">
+				<h4>Selected Fish</h4>
+				<table class="table">
+					<tr ng-repeat="item in tank.fish" class="compat-{{item.isCompatible}}">
+						<td><img style="max-width:100px;" ng-src="{{item.picture}}"></td>
+						<td>
+							{{item.nickname}}
+							<!-- ph min = 3 max = 9 -->
+							<!-- 100% = 9-3 = 6 -->
+							<gauge name="T" range="[10,32]" min="item.temp_min_c" max="item.temp_max_c" color="#face00"></gauge>
+							<gauge name="pH" range="[3,9]" min="item.min_ph" max="item.max_ph" color="#0face0"></gauge>
+							<gauge name="dh" range="[0,40]" min="item.min_dh" max="item.max_dh" color="#0Fface"></gauge>
+							<gauge name="Size" range="[0,tank.min*2.54]" min="0" max="item.size_max_cm" color="#fface0"></gauge>
+
+						</td>
+						<td>
+							<a class="btn btn-success" href="#/index/fish{{item.path}}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a><br/>
+							<button class="btn btn-danger" ng-click="removeFish(item)"><span class="glyphicon glyphicon-remove-circle"></span></button></td>
+					</tr>
+				</table>
+				<button class="btn btn-info btn-lg" style="width:100%" ng-show="tank.fish.length > 0" scroll-on-click href="#invertebrate-zone">Select Invertebrate</button>
+			</div>
+		</div>
+
+	</section>
+
+	<hr/>
+
+	<section id="invertebrate-zone" class="area">
+		
+		<h1>Invertebrate</h1>
+		<search call-back="doSearchInverte" query="inverte_filter.query" hide-toggle="true" active="true"></search>
+		<!--<button class="btn btn-info" scroll-on-click href="#fish-zone">Fish</button>-->
+		<div class="row">
+			<div class="col-sm-8">
+				<section class="items invertebrate" >
+					<div  ng-repeat = "item in invertebrate_result" class="item" ng-show="item.exist">
+						<show-image item="item" empty-images="emptyImages" on-load="onLoad" on-click="addInvertebrate" href="#/index/invertebrate{item.path}}"></show-image>
+					</div>
+				</section>	
+			</div>
+			<div class="col-sm-4">
+				<button class="btn btn-info btn-lg" style="width:100%" ng-show="tank.fish.length > 0" scroll-on-click href="#fish-zone">Select Fish</button>
+				<h4>Selected Invertebrate</h4>
+				<table class="table">
+					<tr ng-repeat="item in tank.invertebrates" class="compat-{{item.isCompatible}}">
+						<td><img style="max-width:100px;" ng-src="{{item.picture}}"></td>
+						<td>
+							{{item.nickname}}
+							<!-- ph min = 3 max = 9 -->
+							<!-- 100% = 9-3 = 6 -->
+							<gauge name="T" range="[10,32]" min="item.temp_min_c" max="item.temp_max_c" color="#face00"></gauge>
+							<gauge name="pH" range="[3,9]" min="item.min_ph" max="item.max_ph" color="#0face0"></gauge>
+							<gauge name="dh" range="[0,40]" min="item.min_dh" max="item.max_dh" color="#0Fface"></gauge>
+							<gauge name="Size" range="[0,tank.min*2.54]" min="0" max="item.size_max_cm" color="#fface0"></gauge>
+
+						</td>
+						<td>
+							<a class="btn btn-success" href="#/index/invertebrate{{item.path}}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a><br/>
+							<button class="btn btn-danger" ng-click="removeInvertebrate(item)"><span class="glyphicon glyphicon-remove-circle"></span></button></td>
+					</tr>
+				</table>
+				<button class="btn btn-info btn-lg" style="width:100%" ng-show="tank.invertebrates.length > 0" scroll-on-click href="#plant-zone">Select Plant</button>
+			</div>
+		</div>
+	</section>
+
+	<hr/>
+
+	<section id="plant-zone" class="area">
+		
+		<h1>Plant</h1>
+		<search-plant call-back="doSearchPlant" query="plant_filter.query"  hide-toggle="true" active="true"></search-plant>
+		<!--<button class="btn btn-info" scroll-on-click href="#fish-zone">Fish</button>-->
+		<div class="row">
+			<div class="col-sm-8">
+				<section class="items plant" >
+					<div  ng-repeat = "item in plant_result" class="item" ng-show="item.exist">
+						<show-image item="item" empty-images="emptyImages" on-load="onLoad" on-click="addPlant" href="#/index/plant{item.path}}"></show-image>
+					</div>
+				</section>	
+			</div>
+			<div class="col-sm-4">
+				<button class="btn btn-info btn-lg" style="width:100%" ng-show="tank.invertebrates.length > 0" scroll-on-click href="#invertebrate-zone">Back to invertebrate</button>
+				<h4>Selected Plants</h4>
+				<table class="table">
+					<tr ng-repeat="item in tank.plants" class="compat-{{item.isCompatible}}">
+						<td><img style="max-width:100px;" ng-src="{{item.picture}}"></td>
+						<td>
+							{{item.nickname}}
+							<!-- ph min = 3 max = 9 -->
+							<!-- 100% = 9-3 = 6 -->
+							<gauge name="T" range="[10,32]" min="item.temp_min_c" max="item.temp_max_c" color="#face00"></gauge>
+							<gauge name="pH" range="[3,9]" min="item.min_ph" max="item.max_ph" color="#0face0"></gauge>
+							<gauge name="dh" range="[0,40]" min="item.min_dh" max="item.max_dh" color="#0Fface"></gauge>
+							Light : {{item.light_needs}}<br/>
+							Placement : {{item.tank_placement}}
+
+						</td>
+						<td>
+							<a class="btn btn-success" href="#/index/plant{{item.path}}" target="_blank"><span class="glyphicon glyphicon-eye-open"></span></a><br/>
+							<button class="btn btn-danger" ng-click="removePlant(item)"><span class="glyphicon glyphicon-remove-circle"></span></button></td>
+					</tr>
+				</table>
+				<button class="btn btn-success btn-lg" style="width:100%" ng-click="doAnalyze()">Analyze</button>
+			</div>
+		</div>
+	</section>
+
+</section>
+<section class="analize tank page" ng-show="isAnalyzeMode">
+	<h2>Analyze</h2>
+	<div class="row">
+		<div class="col-md-6">
+			<section class="area">
+				<div style="margin-top:-100px;padding-bottom:75px;">
+					<tank-model tank="tank"></tank-model>
+				</div>
+				<div class="data">
+					<span class="header">Volume:</span> <span>{{tank.width * tank.depth * tank.height / 61.024 | number:2}} Liters</span> <span>{{tank.width * tank.depth * tank.height * 0.0043290 | number:2}} US Gallon</span>
+				</div>
+				<div class="data">
+					<span class="header">Weight:</span> <span>{{tank.width * tank.depth * tank.height / 61.024 | number:2}} Kg.</span> 
+				</div>
+				<div class="data">
+					<span class="header">pH:</span> <span>{{tank.min_ph}}</span> - <span>{{tank.max_ph}}</span>
+				</div>
+				<div class="data">
+					<span class="header">dH:</span> <span>{{tank.min_dh}}</span> - <span>{{tank.max_dh}}</span>
+				</div>
+				<div class="data">
+					<span class="header">Temparature:</span> <span>{{tank.temp_min_c}}</span> - <span>{{tank.temp_max_c}}</span> C
+				</div>
+				<button class="btn btn-primary btn-lg" ng-click="saveTank()">Save</button>
+			</section>
+		</div>
+		<div class="col-md-6">
+			<table class="table">
+				<tr ng-repeat="item in tank.fish" class="compat-{{item.isCompatible}}">
+						<td><a  href="#/index/fish{{item.path}}" target="_blank"><img style="max-width:100px;" ng-src="{{item.picture}}"></a></td>
+						<td>
+							<a  href="#/index/fish{{item.path}}" target="_blank">{{item.nickname}}</a>
+							<!-- ph min = 3 max = 9 -->
+							<!-- 100% = 9-3 = 6 -->
+							<gauge name="T" range="[10,32]" min="item.temp_min_c" max="item.temp_max_c" color="#face00"></gauge>
+							<gauge name="pH" range="[3,9]" min="item.min_ph" max="item.max_ph" color="#0face0"></gauge>
+							<gauge name="dh" range="[0,40]" min="item.min_dh" max="item.max_dh" color="#0Fface"></gauge>
+							<gauge name="Size" range="[0,tank.min*2.54]" min="0" max="item.size_max_cm" color="#fface0"></gauge>
+
+						</td>
+						
+							
+							
+						
+					</tr>
+				<tr ng-repeat="item in tank.invertebrates" class="compat-{{item.isCompatible}}">
+						<td><a  href="#/index/invertebrate{{item.path}}" target="_blank"><img style="max-width:100px;" ng-src="{{item.picture}}"></a></td>
+						<td>
+							<a  href="#/index/invertebrate{{item.path}}" target="_blank">{{item.nickname}}</a>
+							<!-- ph min = 3 max = 9 -->
+							<!-- 100% = 9-3 = 6 -->
+							<gauge name="T" range="[10,32]" min="item.temp_min_c" max="item.temp_max_c" color="#face00"></gauge>
+							<gauge name="pH" range="[3,9]" min="item.min_ph" max="item.max_ph" color="#0face0"></gauge>
+							<gauge name="dh" range="[0,40]" min="item.min_dh" max="item.max_dh" color="#0Fface"></gauge>
+							<gauge name="Size" range="[0,tank.min*2.54]" min="0" max="item.size_max_cm" color="#fface0"></gauge>
+
+						</td>
+						
+					</tr>
+				<tr ng-repeat="item in tank.plants" class="compat-{{item.isCompatible}}">
+						<td><a  href="#/index/plant{{item.path}}" target="_blank"><img style="max-width:100px;" ng-src="{{item.picture}}"></a></td>
+						<td>
+							<a  href="#/index/plant{{item.path}}" target="_blank">{{item.nickname}}</a>
+							<!-- ph min = 3 max = 9 -->
+							<!-- 100% = 9-3 = 6 -->
+							<gauge name="T" range="[10,32]" min="item.temp_min_c" max="item.temp_max_c" color="#face00"></gauge>
+							<gauge name="pH" range="[3,9]" min="item.min_ph" max="item.max_ph" color="#0face0"></gauge>
+							<gauge name="dh" range="[0,40]" min="item.min_dh" max="item.max_dh" color="#0Fface"></gauge>
+							Light : {{item.light_needs}}<br/>
+							Placement : {{item.tank_placement}}
+
+						</td>
+					</tr>
+			</table>
+		</div>
+
+	</div>
+	
+</section>

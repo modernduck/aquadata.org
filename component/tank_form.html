@@ -1,0 +1,24 @@
+<section class="tank">
+	<div ng-hide="tank.isModeVolume">
+		<div class="input-group">
+	      <div class="input-group-addon">W</div>
+	      	<input type="number" class="form-control" ng-model="tank.width" placeholder="Width">
+	      <div class="input-group-addon">inch</div>
+	   	 </div>	
+	   	 
+	   	 <div class="input-group">
+	      <div class="input-group-addon">D</div>
+	      	<input type="number" class="form-control" ng-model="tank.depth" placeholder="Depth">
+	      	<div class="input-group-addon">inch</div>
+	   	 </div>	
+	   	 <div class="input-group">
+	      <div class="input-group-addon">H</div>
+	      	<input type="number" class="form-control" ng-model="tank.height" placeholder="Height">
+	      	<div class="input-group-addon">inch</div>
+	   	 </div>	
+	</div>
+	<div ng-show="tank.isModeVolume">
+
+	</div>
+
+</section>

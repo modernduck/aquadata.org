@@ -1,0 +1,52 @@
+<section class="search">
+	<button ng-hide="hideToggle" class="btn btn-primary"  ng-click="isSearch = !isSearch">
+	  Advance Search
+	</button>
+	<div ng-show="isSearch">
+  		<div class="well">
+			<form ng-submit="search()" class="form-inline">
+				 <div class="form-group">
+				 	<div class="input-group">
+				      <div class="input-group-addon">Name</div>
+				      <input type="text" class="form-control" ng-model="q.nickname" placeholder="Name">
+				    </div>	
+				</div> 
+				<div class="form-group">
+				 	<div class="input-group">
+				      <div class="input-group-addon">Sci. Name</div>
+				      <input type="text" class="form-control" ng-model="q.name" placeholder="Name">
+				    </div>	
+				</div>
+				 <div class="form-group">
+					<div class="input-group">
+				      <div class="input-group-addon">pH</div>
+				      <input type="text" class="form-control"  placeholder="min" ng-model="q.min_ph">
+				      <div class="input-group-addon">-</div>
+				      <input type="text" class="form-control"  placeholder="max" ng-model="q.max_ph">
+				    </div>
+				</div>
+				 <div class="form-group">
+				 	<div class="input-group">
+				      <div class="input-group-addon">Temp.</div>
+				     <input type="number" class="form-control" ng-model="q.min_temp" placeholder="Min">
+				      <div class="input-group-addon">-</div>
+				      <input type="number" class="form-control" ng-model="q.max_temp" placeholder="Max">
+				      <div class="input-group-addon">C</div>
+				    </div>
+				</div>
+				<div class="form-group">
+				 	<div class="input-group">
+				      <div class="input-group-addon">Size</div>
+				     <input type="number" class="form-control" ng-model="q.min_size" placeholder="Min">
+				      <div class="input-group-addon">-</div>
+				      <input type="number" class="form-control" ng-model="q.max_size" placeholder="Max">
+				       <div class="input-group-addon" >cm</div>
+				    </div>
+				</div>
+				<input type="submit" value="Search" class="btn btn-primary" >
+
+			</form>
+		</div>
+	</div>
+	
+</section>
