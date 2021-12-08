@@ -1,0 +1,49 @@
+<!-- Replace the first 3 values with your own API key and the details       -->
+<!-- for the species you want to display.                                   -->
+<!-- Set the 4 configuration options according to your needs.               -->
+<script type="text/javascript">
+    var arkiveApiKey = '3jRmRdunhygdVDme8_tsv9dREL55elKj5WpqDguuukM1',
+    arkiveApiSpeciesName = 'phoca%20largha', // note spaces replaced by %20
+    //arkiveApiSpeciesId = '00000000-0000-0000-0000-000000000000', 
+        // optional, but recommended
+
+    arkiveApiWidth = 320,
+    arkiveApiHeight = 355,
+    arkiveApiImages = true, // whether to include thumbnails
+    arkiveApiText = false; // whether to include species facts / description
+
+</script>
+<!-- ensure the src attribute in the following script tag points to your JS file -->
+
+<div id="arkiveIframe"></div>
+<script type="text/javascript">
+function arkiveEmbedCallback(data) {
+	var iframeCreation = '<iframe id="frame" name="widget" src ="#" width="100%" height="1" marginheight="0" marginwidth="0" frameborder="no"></iframe>';
+	var iframe = window.location.protocol + "//" + (data.results[0].url);
+	if (data.error != 'null') {
+  	    document.getElementById("arkiveIframe").innerHTML = iframeCreation;
+	    var iframeAttr = parent.document.getElementById("frame");
+	    iframeAttr.height = arkiveApiHeight;
+	    iframeAttr.width = arkiveApiWidth + 22;
+	    iframeAttr.src = iframe;
+    }
+}
+(function () {
+    function async_load() {
+        var s = document.createElement('script'); 
+        s.type = 'text/javascript';
+        s.async = true;
+        s.src = 'https://api.arkive.org/v2/embedScript/species/scientificName/' + arkiveApiSpeciesName 
+        + '?key=' + arkiveApiKey + '&mtype=all&w=' 
+        + arkiveApiWidth + '&h=' + arkiveApiHeight + '&tn=' + (arkiveApiImages ? 1 : 0) + '&text=' 
+        + (arkiveApiText ? 1 : 0) + '&callback=arkiveEmbedCallback';
+        var x = document.getElementsByTagName('script')[0];
+        x.parentNode.insertBefore(s, x);
+    }
+    if (window.attachEvent)
+        window.attachEvent('onload', async_load);
+    else
+        window.addEventListener('load', async_load, false);
+})();
+       
+</script>

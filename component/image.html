@@ -1,0 +1,11 @@
+<section ng-show="item.exist">
+	<div ng-show="item.exist">
+		<a ng-href="{{target}}" ng-click="onClick()"><img ng-src="{{item.picture}}"  imageonload="afterLoad"></a>
+		<div id="para-{{item.path}}" class="detail">
+			<span  class="name">{{item.nickname}}</span>
+		</div>
+	</div>
+	<div ng-hide="item.exist">
+		<h2>{{item.name}}</h2>
+	</div>
+</section>

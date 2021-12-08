@@ -1,0 +1,8 @@
+<section class="filter">
+	<search call-back="doSearch" query="query" hide-toggle="true" active="true"></search>
+</section>
+<section class="items plant" >
+	<div  ng-repeat = "item in items" class="item" ng-show="item.exist">
+		<show-image item="item" empty-images="['http://www.theaquariumwiki.com/images/e/e3/No_Image.png','http://www.theaquariumwiki.com','',null,undefined,'http://www.flowgrow.de/db/assets/images/placeholder_info.jpg']" on-load="arrangeBox" href="#/index/invertebrate{{item.path}}"></show-image>
+	</div>	
+</section>

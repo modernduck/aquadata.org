@@ -1,0 +1,11 @@
+<section class="page">
+	<ul class="tanks">
+		<li class="item" ng-repeat="tank in tanks" style="display:inline-block;margin-right:25px;"><a href="#/mytank/{{tank.name}}" >
+			<div style="width:150px;height:150px;">
+				<tank-model tank="tank" scale="150" name="{{tank.name}}"></tank-model>
+			</div>
+		</a></li>
+	
+	</ul>
+
+</section>

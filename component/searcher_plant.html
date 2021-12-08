@@ -1,0 +1,80 @@
+<section class="search">
+	<button ng-hide="hideToggle" class="btn btn-primary"  ng-click="isSearch = !isSearch">
+	  Advance Search
+	</button>
+	<div ng-show="isSearch">
+  		<div class="well">
+			<form ng-submit="search()" class="form-inline">
+				 <div class="form-group">
+				 	<div class="input-group">
+				      <div class="input-group-addon">Name</div>
+				      <input type="text" class="form-control" ng-model="q.nickname" placeholder="Name">
+				    </div>	
+				</div> 
+				<div class="form-group">
+				 	<div class="input-group">
+				      <div class="input-group-addon">Sci. Name</div>
+				      <input type="text" class="form-control" ng-model="q.name" placeholder="Name">
+				    </div>	
+				</div>
+				 <div class="form-group">
+					<div class="input-group">
+				      <div class="input-group-addon">pH</div>
+				      <input type="text" class="form-control"  placeholder="min" ng-model="q.min_ph">
+				      <div class="input-group-addon">-</div>
+				      <input type="text" class="form-control"  placeholder="max" ng-model="q.max_ph">
+				    </div>
+				</div>
+				 <div class="form-group">
+				 	<div class="input-group">
+				      <div class="input-group-addon">Temp.</div>
+				     <input type="number" class="form-control" ng-model="q.min_temp" placeholder="Min">
+				      <div class="input-group-addon">-</div>
+				      <input type="number" class="form-control" ng-model="q.max_temp" placeholder="Max">
+				      <div class="input-group-addon">C</div>
+				    </div>
+				</div>
+				<div class="form-group">
+				 	<div class="input-group">
+				      <div class="input-group-addon">Placement</div>
+				     <select  class="form-control" ng-model="q.tank_placement" placeholder="Placement">
+				 		<option value="">All</option>
+				 		<option value="Foreground">Foreground</option>
+				 		<option value="Midground">Midground</option> 
+				 		<option value="Background">Background</option>    	
+				 		<option value="Floating">Floating</option>
+				     </select>
+				      
+				    </div>
+				</div>
+				<div class="form-group">
+				 	<div class="input-group">
+				      <div class="input-group-addon">Light</div>
+				     <select  class="form-control" ng-model="q.light_needs" placeholder="Placement">
+				 		<option value="">All</option>
+				 		<option value="Low">Low</option>
+				 		<option value="Medium">Medium</option> 
+				 		<option value="High">High</option>    	
+				     </select>
+				      
+				    </div>
+				</div>
+				<div class="form-group">
+				 	<div class="input-group">
+				      <div class="input-group-addon">Growth Rate</div>
+				     <select  class="form-control" ng-model="q.growth_rate" placeholder="Placement">
+				 		<option value="">All</option>
+				 		<option value="Slow">Slow</option>
+				 		<option value="Average">Average</option> 
+				 		<option value="Fast">Fast</option>    	
+				     </select>
+				      
+				    </div>
+				</div>
+				<input type="submit" value="Search" class="btn btn-primary" >
+
+			</form>
+		</div>
+	</div>
+	
+</section>

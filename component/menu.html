@@ -1,0 +1,41 @@
+<nav class="navbar">
+			<div class="navbar-header">
+		      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-target="#main-menu-bar">
+		        <span class="sr-only">Toggle navigation</span>
+		       	<span class="icon-bar"></span>
+		       	<span class="icon-bar"></span>
+		       	<span class="icon-bar"></span>
+		      </button>
+		      <a class="navbar-brand" href="#" style=""><img src="logo.png"></a>
+		    </div>
+		     <div class="collapse navbar-collapse" id="main-menu-bar">
+				<ul class="nav navbar-nav main"  style="">
+					<li ng-repeat ="menu in menus.left" class="{{menu.class}}" >
+						<a href="#{{menu.url}}" class="{{menu.css}}">{{menu.name}}</a>
+						<ul class="nav sub" ng-show="{{menu.subs.length > 0}}" role="menu" >
+							<li ng-repeat="item in menu.subs" ng-show="menu.isShow"><a href="#{{item.url}}" class="{{item.css}}">{{item.name}}</a></li>
+						</ul>
+					</li>
+					<li><a href="" ng-click="isSearch = !isSearch;" ><span class="glyphicon glyphicon-search" aria-hidden="true"></span></a></li>
+					<!--glyphicon glyphicon-search-->
+				</ul>
+				<form ng-show="isSearch"  class="navbar-form navbar-left" ng-submit="search()" role="search">
+				  <div class="form-group">
+				    <input ng-model="query" type="text" class="form-control" placeholder="Search" focus-me="isSearch">
+				  </div>
+				  <input type="submit" class="btn btn-default" ng-show="false">
+				</form>
+				<ul class="nav navbar-nav pull-right"  style="">
+					<li ng-repeat ="menu in menus.right" class="{{menu.class}}" >
+						<a href="#{{menu.url}}" class="{{menu.css}}">{{menu.name}}</a>
+					</lig>
+					
+				</ul>
+				
+			</div>
+			<style type="text/css">
+
+
+
+			</style>
+		</nav>

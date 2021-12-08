@@ -1,0 +1,9 @@
+<section class="filter">
+	<search call-back="doSearch" query="query" hide-toggle="true" active="true"></search>
+	
+</section>
+<section class="items" infinite-scroll='loadMore()' infinite-scroll-distance='1'>
+	<div  ng-repeat = "item in items" class="item" ng-show="item.exist">
+		<show-image item="item" empty-images="['http://www.theaquariumwiki.com/images/e/e3/No_Image.png','http://www.theaquariumwiki.com','',null,undefined]" on-load="arrangeBox" href="#/index/fish{{item.path}}"></show-image>
+	</div>	
+</section>
